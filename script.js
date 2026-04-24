@@ -232,5 +232,29 @@ function calculateSLA(callDateTime, arrivalDateTime, leakType) {
 }
  
 // --- Ticket #13: Display Results Dynamically ---
+
+/**
+ * displayResults
+ * Takes the results object from calculateSLA and updates the DOM
+ * to show the compliance status, time taken, and GSMR deadline.
+ * @param {object} results - { withinSLA, timeTaken, gsmrDeadline }
+ */
+function displayResults(results) {
+  // Show the results panel
+  resultsPanel.hidden = false;
+ 
+  // Set compliance status
+  if (results.withinSLA) {
+    resultStatus.className   = 'result-status within';
+    resultStatus.textContent = 'Within SLA';
+  } else {
+    resultStatus.className   = 'result-status outside';
+    resultStatus.textContent = 'Outside SLA';
+  }
+ 
+  // Update time taken and GSMR deadline
+  timeTakenSpan.textContent  = results.timeTaken;
+  gsmrTargetSpan.textContent = results.gsmrDeadline;
+}
  
 // --- Ticket #14: Clear Form ---
