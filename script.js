@@ -159,6 +159,77 @@ arrivalDateInput.addEventListener('change', checkAndCalculate);
 arrivalTimeInput.addEventListener('change', checkAndCalculate);
  
 // --- Ticket #12: SLA Calculation Logic ---
+
+/**
+ * getTimeDifferenceInMinutes
+ * Calculates the difference between two Date objects in minutes.
+ * @param {Date} startDateTime
+ * @param {Date} endDateTime
+ * @returns {number} difference in whole minutes
+ */
+function getTimeDifferenceInMinutes(startDateTime, endDateTime) {
+  const diffMs = endDateTime - startDateTime;
+  return Math.floor(diffMs / 1000 / 60);
+}
+ 
+/**
+ * formatMinutesToHHMM
+ * Converts a number of minutes into a hh:mm string.
+ * e.g. 75 minutes → "01:15"
+ * @param {number} minutes
+ * @returns {string}
+ */
+function formatMinutesToHHMM(minutes) {
+  const hrs  = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
+}
+ 
+/**
+ * formatDateToDDMMYYYY
+ * Formats a Date object to dd/mm/yyyy hh:mm string.
+ * e.g. 2025-04-01T14:30 → "01/04/2025 14:30"
+ * @param {Date} date
+ * @returns {string}
+ */
+function formatDateToDDMMYYYY(date) {
+  const dd   = String(date.getDate()).padStart(2, '0');
+  const mm   = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+  const hh   = String(date.getHours()).padStart(2, '0');
+  const mins = String(date.getMinutes()).padStart(2, '0');
+  return `${dd}/${mm}/${yyyy} ${hh}:${mins}`;
+}
+ 
+/**
+ * calculateSLA
+ * Core SLA calculation function.
+ * Takes call received time, arrival time and leak type,
+ * calculates the GSMR deadline, time taken, and whether within SLA.
+ * Passes results to displayResults.
+ * @param {Date}   callDateTime
+ * @param {Date}   arrivalDateTime
+ * @param {string} leakType
+ */
+function calculateSLA(callDateTime, arrivalDateTime, leakType) {
+  const slaLimitMinutes  = getSLALimit(leakType);
+  const timeTakenMinutes = getTimeDifferenceInMinutes(callDateTime, arrivalDateTime);
+  const withinSLA        = timeTakenMinutes <= slaLimitMinutes;
+ 
+  // Calculate the GSMR target deadline
+  const gsmrDeadline = new Date(callDateTime.getTime() + slaLimitMinutes * 60 * 1000);
+ 
+  const results = {
+    withinSLA,
+    timeTaken:    formatMinutesToHHMM(timeTakenMinutes),
+    gsmrDeadline: formatDateToDDMMYYYY(gsmrDeadline),
+  };
+ 
+  console.log('SLA Results:', results);
+ 
+  // Pass to display function (ticket #13)
+  displayResults(results);
+}
  
 // --- Ticket #13: Display Results Dynamically ---
  
