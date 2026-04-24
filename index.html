@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLA Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+ 
+    <header>
+      <h1>SLA Calculator</h1>
+    </header>
+ 
+    <main>
+      <section class="calculator-card">
+ 
+        <!-- Leak Type -->
+        <div class="form-group">
+          <label for="leak-type">What type of a gas leak are you attending?</label>
+          <select id="leak-type" name="leak-type">
+            <option value="" disabled selected>Select leak type</option>
+            <option value="priority">Priority</option>
+            <option value="uncontrolled">Uncontrolled</option>
+            <option value="controlled">Controlled</option>
+          </select>
+        </div>
+ 
+        <!-- Call Received -->
+        <div class="form-group">
+          <label>When was the call received?</label>
+          <div class="datetime-inputs">
+            <input type="date" id="call-date" name="call-date" />
+            <input type="time" id="call-time" name="call-time" />
+          </div>
+        </div>
+ 
+        <!-- Arrival Time -->
+        <div class="form-group">
+          <label>When did you arrive?</label>
+          <div class="datetime-inputs">
+            <input type="date" id="arrival-date" name="arrival-date" />
+            <input type="time" id="arrival-time" name="arrival-time" />
+          </div>
+        </div>
+ 
+        <!-- Results Panel -->
+        <div class="results-panel" id="results-panel" hidden>
+ 
+          <div class="result-status" id="result-status">
+            <!-- Dynamically populated: Within SLA / Outside SLA -->
+          </div>
+ 
+          <p>
+            You arrived in: <span id="time-taken">--:--</span>
+          </p>
+ 
+          <p>
+            GSMR Target: <span id="gsmr-target">--/--/---- --:--</span>
+          </p>
+ 
+        </div>
+ 
+        <!-- Clear Button -->
+        <div class="form-actions">
+          <button type="button" id="clear-btn">Clear Form</button>
+        </div>
+ 
+      </section>
+    </main>
+ 
+    <script src="script.js"></script>
+ 
+  </body>
+</html>
