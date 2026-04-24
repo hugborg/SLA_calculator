@@ -52,6 +52,7 @@ leakTypeSelect.addEventListener('change', function () {
   const selected = getLeakType();
   const limit = getSLALimit(selected);
   console.log(`Leak type selected: ${selected}, SLA limit: ${limit} minutes`);
+  checkAndCalculate();
 });
  
 // --- Ticket #11: Date & Time Pickers ---
