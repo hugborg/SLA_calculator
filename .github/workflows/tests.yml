@@ -1,0 +1,39 @@
+# ================================
+#  SLA Calculator - CI/CD Pipeline
+#  Ticket #16 - GitHub Actions
+# ================================
+ 
+name: Run Tests
+ 
+# Trigger the workflow on every push and pull request to main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+ 
+jobs:
+  test:
+    name: Run Jest Unit Tests
+    runs-on: ubuntu-latest
+ 
+    steps:
+      # Step 1 - Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+ 
+      # Step 2 - Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+ 
+      # Step 3 - Install dependencies (Jest)
+      - name: Install dependencies
+        run: npm install
+ 
+      # Step 4 - Run Jest tests
+      - name: Run tests
+        run: npm test
