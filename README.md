@@ -154,9 +154,79 @@ All tickets are managed on the [GitHub Projects board](https://github.com/users/
 
 ## 5. Build Narrative
 
+This section documents the step by step process of building the SLA Calculator MVP, from the initial HTML structure through to a fully functional application.
+
+### Step 1 - HTML Structure
+
+The build began with the HTML skeleton, establishing the core structure of the application before any styling or logic was added. This included the header, the calculator card, all form inputs, the results panel, and the clear form button. The results panel was given a 'hidden' attribute by default so it would only appear once a valid calculation has been made. Separate files for style.css and script.js were also scaffolded at this stage, with section comments mapping to each upcoming ticket to keep development organised.
+
+### Step 2 - CSS Styling
+
+With the structure in place, styling was applied to match the Figma prototype. CSS variables were defined at the root level for the colour palette, making future changes straightforward. The dark navy was used for the header and clear button, with a light blue border on the calculator card and a light grey page background, all taken from the Figma design.
+
+IBM Plex Mono was chosen as the font via Google Fonts, matching the monospace style used in the prototype while being more legible on screen than a default system monospace font.
+
+Colour blind accessibility was considered at this stage, the SLA result status uses orange-red rather than pure red for the fail state, ensuring it is distinguishable for users with red/green colour blindness. Both pass and fail states also use a ✔ or ✖ icon alongside the colour so the result is never conveyed by colour alone.
+
+### Step 3 - Leak Type Dropdown
+
+The first piece of JavaScript functionality added the leak type dropdown. The SLA_RULES object was defined to map each leak type to its SLA limit in minutes, Priority and Uncontrolled at 60 minutes and Controlled at 120 minutes. All DOM references were established at this stage so they would be available to all subsequent functions without repetition.
+
+### Step 4 - Date and Time Pickers
+
+Date and time inputs were wired up for both the call received and arrival fields. A central checkAndCalculate() function was introduced as the controller for the entire form, called whenever any input changes. The function checks whether all fields are filled before triggering validation and calculation. Validation was added to handle two error states: arrival time earlier than call received time, and arrival time identical to call received time. Both display a clear error message in the results panel.
+
+### Step 5 - SLA Calculation Logic
+
+The core calculation logic was implemented across three helper functions. getTimeDifferenceInMinutes() calculates the gap between two timestamps. formatMinutesToHHMM() converts the result into a readable hh:mm format. formatDateToDDMMYYYY() formats the GSMR deadline ito the dd/mm/yyyy hh:mm format shown in the wireframe. The calculateSLA() function ties these together, determining compliance and packaging the results for display.
+
+### Step 6 — Display Results Dynamically
+
+The displayResults() function was added to update the DOM with the calculated results. The results panel is revealed, the status element is given either a within or outside CSS class to apply the appropriate styling, and the time taken and GSMR deadline are populated. The result updates automatically whenever any input changes without requiring the user to submit the form.
+
+### Step 7 — Clear Form Button
+
+Two bugs were identified during testing and resolved before the end of 
+Sprint 2.
+
+**Bug — SLA equality check and incorrect GSMR target**
+A controlled leak with an arrival time of exactly 120 minutes was incorrectly returning Outside SLA due to floating point precision. Math.floor was replaced with Math.round to resolve this. The GSMR target deadline was also found to be using the SLA limit (1 or 2 hours) rather than the correct 12-hour GSMR window, which was corrected.
+
+**Bug — Dropdown not triggering recalculation**
+Changing the leak type dropdown after a result had been displayed was not refreshing the result. A missing checkAndCalculate() call was added to the dropdown event listener to resolve this.
+
+### Prototype vs Final Build
+
+The screenshot below shows the Figma prototype alongside the final built application. The layout, colour scheme, typography, and card structure are consistent across both. The main visual difference is that the built version uses native browser date and time input fields rather than the icon-based pickers shown in the prototype, which is expected given the MVP scope.
+
+![Prototype vs Build](SLA_calculator_comparison.png)
+
+*Image Four: Figma prototype (left) alongside the final built application (right)*
+
 ## 6. Testing and CI/CD
 
 ## 7. Version Control Strategy
+
+### Branching Strategy
+
+This project followed a feature branch workflow. All development was carried out on dedicated branches rather than directly on main, ensuring the main branch always contained stable, tested code.
+
+Each branch was named using a consistent convention that reflected its 
+purpose
+
+### Pull Requests
+
+Every branch was merged into main via a pull request. No direct commits were made to main during the build phase. Each pull request was then linked to the corresponding ticket on the GitHub project board.
+
+### Repository Structure
+
+```
+SLA_calculator/
+├── index.html      # Application structure
+├── style.css       # Styling and layout
+├── script.js       # Application logic
+└── README.md       # Project documentation
+```
 
 ## 8. Documentation
 
@@ -165,5 +235,14 @@ All tickets are managed on the [GitHub Projects board](https://github.com/users/
 ### Technical guide
 
 ## 9. Ticket Maintenance
+
+### Conventions
+
+This project followed these ticketing conventions throughout development:
+
+- **One ticket → one branch → one pull request**
+- Feature tickets are prefixed with [Discovery], [Design], [Build], [Test], [DevOps] or [Docs]
+- Bug tickets are prefixed with [Bug] and documented separately from feature tickets, including steps to reproduce, expected behaviour, actual behaviour, and the fix applied
+
 
 ## 10. Evaluation
