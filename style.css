@@ -1,0 +1,240 @@
+/* ================================
+   SLA Calculator - Stylesheet
+   Ticket #5 - Style the UI with CSS
+   ================================ */
+ 
+/* --- CSS Variables --- */
+:root {
+  --navy:        #1B1B8F;
+  --navy-dark:   #14147a;
+  --blue-border: #4A90D9;
+  --bg:          #e8e8e8;
+  --card-bg:     #ffffff;
+  --text:        #1a1a1a;
+  --text-muted:  #555555;
+  --input-border:#cccccc;
+ 
+  /* Colour-blind safe status colours */
+  --within-sla:  #1a7a3c;   /* green — sufficient contrast on white */
+  --outside-sla: #b94a00;   /* orange-red — distinguishable for red/green colour blindness */
+ 
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --radius: 8px;
+}
+ 
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+/* --- Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+ 
+body {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text);
+  background-color: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+}
+ 
+/* --- Header --- */
+header {
+  width: 100%;
+  max-width: 560px;
+  background-color: var(--navy);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+ 
+header h1 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+ 
+/* --- Calculator Card --- */
+.calculator-card {
+  width: 100%;
+  max-width: 560px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--blue-border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+ 
+/* --- Form Groups --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+ 
+/* --- Dropdown --- */
+select {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text);
+  background-color: var(--card-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  width: 100%;
+  cursor: pointer;
+  appearance: auto;
+}
+ 
+select:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+ 
+/* --- Date & Time Inputs --- */
+.datetime-inputs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+ 
+.datetime-inputs input {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+  background-color: var(--card-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  flex: 1;
+  min-width: 140px;
+}
+ 
+.datetime-inputs input:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+ 
+/* --- Results Panel --- */
+.results-panel {
+  border-top: 1px solid var(--input-border);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ 
+.results-panel p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+ 
+.results-panel span {
+  font-weight: 600;
+  color: var(--text);
+}
+ 
+/* --- Status (Within / Outside SLA) --- */
+/* Uses icon + text + colour for colour blindness accessibility */
+.result-status {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.result-status.within {
+  color: var(--within-sla);
+  background-color: #e6f4ec;
+  border: 1px solid var(--within-sla);
+}
+ 
+.result-status.within::before {
+  content: '✔';
+  font-size: 1rem;
+}
+ 
+.result-status.outside {
+  color: var(--outside-sla);
+  background-color: #fdf0e8;
+  border: 1px solid var(--outside-sla);
+}
+ 
+.result-status.outside::before {
+  content: '✖';
+  font-size: 1rem;
+}
+
+.result-status.error {
+  color: #8b0000;
+  background-color: #fdecea;
+  border: 1px solid #8b0000;
+}
+
+.result-status.error::before {
+  content: '⚠';
+  font-size: 1rem;
+}
+ 
+/* --- Clear Button --- */
+.form-actions {
+  display: flex;
+  justify-content: center;
+}
+ 
+button#clear-btn {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: var(--navy);
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 40px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background-color 0.2s ease;
+}
+ 
+button#clear-btn:hover {
+  background-color: var(--navy-dark);
+}
+ 
+button#clear-btn:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+}
+ 
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+  }
+ 
+  .calculator-card {
+    padding: 24px 16px;
+  }
+ 
+  .datetime-inputs {
+    flex-direction: column;
+  }
+}
