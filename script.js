@@ -258,3 +258,25 @@ function displayResults(results) {
 }
  
 // --- Ticket #14: Clear Form ---
+
+/**
+ * clearForm
+ * Resets all form inputs back to their default empty state
+ * and hides the results panel.
+ */
+function clearForm() {
+  // Reset all inputs
+  leakTypeSelect.value    = '';
+  callDateInput.value     = '';
+  callTimeInput.value     = '';
+  arrivalDateInput.value  = '';
+  arrivalTimeInput.value  = '';
+ 
+  // Hide results panel and reset all displayed values
+  clearError();
+ 
+  console.log('Form cleared');
+}
+ 
+// Event listener for clear button
+clearBtn.addEventListener('click', clearForm);
