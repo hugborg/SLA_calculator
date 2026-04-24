@@ -169,7 +169,7 @@ arrivalTimeInput.addEventListener('change', checkAndCalculate);
  */
 function getTimeDifferenceInMinutes(startDateTime, endDateTime) {
   const diffMs = endDateTime - startDateTime;
-  return Math.floor(diffMs / 1000 / 60);
+  return Math.round(diffMs / 1000 / 60);
 }
  
 /**
@@ -217,7 +217,7 @@ function calculateSLA(callDateTime, arrivalDateTime, leakType) {
   const withinSLA        = timeTakenMinutes <= slaLimitMinutes;
  
   // Calculate the GSMR target deadline
-  const gsmrDeadline = new Date(callDateTime.getTime() + slaLimitMinutes * 60 * 1000);
+  const gsmrDeadline = new Date(callDateTime.getTime() + 12 * 60 * 60 * 1000);
  
   const results = {
     withinSLA,
@@ -258,3 +258,25 @@ function displayResults(results) {
 }
  
 // --- Ticket #14: Clear Form ---
+
+/**
+ * clearForm
+ * Resets all form inputs back to their default empty state
+ * and hides the results panel.
+ */
+function clearForm() {
+  // Reset all inputs
+  leakTypeSelect.value    = '';
+  callDateInput.value     = '';
+  callTimeInput.value     = '';
+  arrivalDateInput.value  = '';
+  arrivalTimeInput.value  = '';
+ 
+  // Hide results panel and reset all displayed values
+  clearError();
+ 
+  console.log('Form cleared');
+}
+ 
+// Event listener for clear button
+clearBtn.addEventListener('click', clearForm);
