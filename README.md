@@ -20,15 +20,15 @@ An initial wireframe was produced to map out the user interface before developme
 
 > ### Wireframe
 > ![Image showing the wireframe for the project](SLA_calculator_wireframe.png)
-> **Figure One:** Showint the wireframe for the App Layout
+> **Figure One:** Showing the wireframe for the App Layout
 >
 > The wireframe outlines the core layout of the SLA Calculator. A dropdown at the top allows the engineer to select the leak type, followed by two date and time input pairs for the call received and arrival time. The results section at the bottom dynamically displays the compliance status, time taken, and GSMR target deadline. A clear form button allows the engineer to rest all fields quickly.
 > 
 >### Prototype
 > ![Gif showing the flow through the prototype created in Figma](SLA_calculator_prototype.gif)
->
+> **Figure Two:** Showing the gif of the prototype for the App functionality
+> 
 > The Figma prototype builds on the wireframe with visual styling applied, demonstrating the intended user flow from input through to result. As well as how the user can clear the form at any stage during the process.
-
 
 ## 3. Project Management
 
