@@ -23,7 +23,7 @@ Before any code was written, an initial wireframe was produced to map out the st
 
 ![Image showing the wireframe for the project](SLA_calculator_wireframe.png)
 
-**Figure One:** Showing the wireframe for the App Layout
+*Figure One: Showing the wireframe for the App Layout*
     
 The wireframe outlines the core layout of the SLA Calculator. A dropdown at the top allows the engineer to select the leak type, followed by two date and time input pairs for the call received and arrival times. The results section at the bottom dynamically displays the compliance status, time taken, and GSMR target deadline. A clear form button allows the engineer to reset all fields quickly.
     
@@ -34,7 +34,7 @@ a leak type through to receiving a compliance result.
 
 ![Gif showing the flow through the prototype created in Figma](SLA_calculator_prototype.gif)
 
-**Figure Two:** Showing the gif of the prototype for the App functionality
+*Figure Two: Showing the gif of the prototype for the App functionality*
  
 The prototype builds on the wireframe by applying visual styling and simulating interactions, including the dynamic display of the SLA result. This allowed the design to be reviewed and refined before writing any code, 
 reducing the risk of layout changes during development.
@@ -45,11 +45,66 @@ reducing the risk of layout changes during development.
 - **Clear result visibility:** The complicance result is displayed prominently below the inputs so the outcome is immediately obvious without scrolling.
 - **Mobile Friendly layout:** The form is structured vertically to work naturally on both mobile and desktop devices.
 
-## 3. Project Management
+## 3. Project Management📅
+
+This project was managed using an Agile methodology, broken down into three sprints. Each sprint had a defined set of goals, allowing the project to be built incrementally and reviewed at each stage before moving forward. This approach kept development focused and made it easier to identify and address issues early before progressing to the next phase.
+
+### Tool - GitHub Projects
+
+GitHub Projects was used as the project management tool throughout development. It was chosen because it integrates directly with the repository, meaning issues, branches, and pull requests are all visible in one place without needing to switch between tools. 
+
+The board was structured using the following columns:
+| Column | Purpose |
+|---|---|
+| Backlog | Tasks identified but not yet ready to start |
+| Ready | Tasks fully defined and ready to be picked up |
+| In Progress | Tasks actively being worked on |
+| Done | Fully completed and merged tasks |
+
+The screenshot below shows the board at the start of Sprint 2, with Sprint 1 completed and all build tickets loaded into the Ready column.
+
+![Project Board](SLA_calculator_project_board.png)
+
+*Image Three: Showing a screenshot of the project board*
+
+### Sprints
+
+**Sprint 1 — Discovery & Design**
+
+The first sprint focused on understanding the problem, defining the 
+requirements, and producing the visual design before any code was written.
+
+- #1 Define Requirements — inputs, outputs, SLA rules
+- #2 Sketch wireframe of the UI layout in Figma
+- #3 Design the UI with CSS layout, colours, pass/fail indicators in Figma
+
+**Sprint 2 — Build**
+
+The second sprint covered the full development of the MVP, building the 
+HTML structure first, then applying styling, and finally implementing all 
+interactive functionality.
+
+- #4 Set up HTML structure — form inputs and results panel
+- #5 Style the UI with CSS
+- #10 Implement leak type dropdown
+- #11 Add date and time pickers
+- #12 Write SLA calculation logic
+- #13 Display results dynamically
+- #14 Implement clear form button
+
+**Sprint 3 — Testing, CI/CD & Documentation**
+
+The third sprint focused on quality assurance, automated testing, and 
+completing all documentation.
+
+- #15 Write unit tests for SLA logic
+- #16 Set up GitHub Actions CI/CD
+- #17 Write user documentation
+- #18 Write technical documentation
 
 ## 4. Requirements / Tickets 🎫
 
-### Functional Requirements
+### Functional Requirements 
 
 The following table captures the functional requirements for the SLA Calculator MVP. Each requirement describes what the application must do from the user's perspective.
 
